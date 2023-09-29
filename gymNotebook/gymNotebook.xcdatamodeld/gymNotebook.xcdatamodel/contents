@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22G91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CardioSet" representedClassName="CardioSet" syncable="YES" codeGenerationType="class">
+        <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="level" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="slope" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="speed" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="execiseCardio" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExeciseCardio" inverseName="cardioSet" inverseEntity="ExeciseCardio"/>
+    </entity>
+    <entity name="ExeciseCardio" representedClassName="ExeciseCardio" syncable="YES" codeGenerationType="class">
+        <attribute name="distance" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="level" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="slope" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="speed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="cardioSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardioSet" inverseName="execiseCardio" inverseEntity="CardioSet"/>
+        <relationship name="typeTraining" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeTraining" inverseName="cardio" inverseEntity="TypeTraining"/>
+    </entity>
+    <entity name="ExecisePower" representedClassName="ExecisePower" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="muscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="execisePower" inverseEntity="MuscleGroup"/>
+        <relationship name="powerSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerSet" inverseName="execisePower" inverseEntity="PowerSet"/>
+    </entity>
+    <entity name="ExeciseStretch" representedClassName="ExeciseStretch" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="stretchSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StretchSet" inverseName="execiseStretch" inverseEntity="StretchSet"/>
+        <relationship name="typeTraining" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeTraining" inverseName="stretch" inverseEntity="TypeTraining"/>
+    </entity>
+    <entity name="MuscleGroup" representedClassName="MuscleGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="execisePower" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExecisePower" inverseName="muscleGroup" inverseEntity="ExecisePower"/>
+        <relationship name="typeTraining" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeTraining" inverseName="power" inverseEntity="TypeTraining"/>
+    </entity>
+    <entity name="PowerSet" representedClassName="PowerSet" syncable="YES" codeGenerationType="class">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repeats" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="execisePower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExecisePower" inverseName="powerSet" inverseEntity="ExecisePower"/>
+    </entity>
+    <entity name="StretchSet" representedClassName="StretchSet" syncable="YES" codeGenerationType="class">
+        <attribute name="repeats" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="set" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="execiseStretch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExeciseStretch" inverseName="stretchSet" inverseEntity="ExeciseStretch"/>
+    </entity>
+    <entity name="Training" representedClassName="Training" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="trainingDate" optional="YES" attributeType="Date" defaultDateTimeInterval="716649840" usesScalarValueType="NO"/>
+        <relationship name="typeTraining" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeTraining" inverseName="training" inverseEntity="TypeTraining"/>
+    </entity>
+    <entity name="TypeTraining" representedClassName="TypeTraining" syncable="YES" codeGenerationType="class">
+        <relationship name="cardio" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExeciseCardio" inverseName="typeTraining" inverseEntity="ExeciseCardio"/>
+        <relationship name="power" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="typeTraining" inverseEntity="MuscleGroup"/>
+        <relationship name="stretch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExeciseStretch" inverseName="typeTraining" inverseEntity="ExeciseStretch"/>
+        <relationship name="training" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Training" inverseName="typeTraining" inverseEntity="Training"/>
+    </entity>
+</model>
