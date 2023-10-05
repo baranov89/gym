@@ -49,28 +49,38 @@ struct TrainingView: View {
                         .frame(height: 30)
                         .padding(.horizontal)
                 case .power:
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack{
-                            ForEach(arrayMuscle) { data in
-                                Text(data.muscle)
-                                    .font(.system(size: 22))
-                                    .foregroundColor(selectedMuscle == data.muscle ? .white : .black)
-                                    .padding(.horizontal)
-                                    .frame(height: 30)
-                                    .background(selectedMuscle == data.muscle ? .gray : .clear)
-                                    .cornerRadius(10)
-                                    .onTapGesture {
-                                        selectedMuscle = data.muscle
-                                        triger.toggle()
-                                        for muscle in arrayMuscle {
-                                            if muscle.muscle == data.muscle {
-                                                    rowId = muscle.id
+                    ScrollViewReader { proxy in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack{
+                                ForEach(arrayMuscle) { data in
+                                    Text(data.muscle)
+                                        .font(.system(size: 22))
+                                        .foregroundColor(selectedMuscle == data.muscle ? .white : .black)
+                                        .padding(.horizontal)
+                                        .frame(height: 30)
+                                        .background(selectedMuscle == data.muscle ? .gray : .clear)
+                                        .cornerRadius(10)
+                                        .id(data.muscle)
+                                        .onTapGesture {
+                                            selectedMuscle = data.muscle
+                                            triger.toggle()
+                                            for muscle in arrayMuscle {
+                                                if muscle.muscle == data.muscle {
+                                                        rowId = muscle.id
+                                                }
                                             }
                                         }
-                                    }
+                                }
                             }
+                            .animation(.bouncy(), value: selectedMuscle)
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
+                        .onChange(of: selectedMuscle) {
+                            withAnimation {
+                                proxy.scrollTo(selectedMuscle, anchor: .center)
+                            }
+                            
+                        }
                     }
                 case .stretch: Text("stretch")
                         .font(.system(size: 22))

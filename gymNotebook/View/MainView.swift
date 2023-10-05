@@ -15,7 +15,6 @@ struct MainView: View {
     )
     
     private var workouts: FetchedResults<Training>
-    
     @State var selectedMuscle = ""
     @State var selectedTag: Int = 1
     var idCurentTraining: String?
