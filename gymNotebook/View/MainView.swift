@@ -15,7 +15,7 @@ struct MainView: View {
     )
     
     private var workouts: FetchedResults<Training>
-    @State var selectedMuscle = ""
+    var trainingViewModel: TrainingViewModel = TrainingViewModel(idCurentTraining: "")
     @State var selectedTag: Int = 1
     var idCurentTraining: String?
     
@@ -42,7 +42,7 @@ struct MainView: View {
                         Label("категории", systemImage: "square.and.pencil")
                     }
                 }
-            TrainingView(id: idCurentTraining, selectedMuscle: $selectedMuscle)
+            TrainingView(vm: trainingViewModel)
                 .tag(1)
                 .tabItem {
                     Button {

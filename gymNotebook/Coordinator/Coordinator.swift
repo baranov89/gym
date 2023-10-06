@@ -16,9 +16,9 @@ final class Coordinator: ObservableObject {
     func goStartView() {
         path.removeLast(path.count)
     }
+    
     func goMainView(data: String?) {
         idCurrentTraining = data
-        print("cccccc")
         path.append(PagesMy.main)
     }
     

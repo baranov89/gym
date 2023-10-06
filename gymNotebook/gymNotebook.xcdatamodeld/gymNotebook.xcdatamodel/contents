@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22G91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CardioSet" representedClassName="CardioSet" syncable="YES" codeGenerationType="class">
         <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="level" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -31,10 +31,18 @@
         <relationship name="stretchSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StretchSet" inverseName="execiseStretch" inverseEntity="StretchSet"/>
         <relationship name="typeTraining" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeTraining" inverseName="stretch" inverseEntity="TypeTraining"/>
     </entity>
+    <entity name="ExerciseName" representedClassName="ExerciseName" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="muscleGroupName" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroupName" inverseName="exerciseName" inverseEntity="MuscleGroupName"/>
+    </entity>
     <entity name="MuscleGroup" representedClassName="MuscleGroup" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="execisePower" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExecisePower" inverseName="muscleGroup" inverseEntity="ExecisePower"/>
         <relationship name="typeTraining" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeTraining" inverseName="power" inverseEntity="TypeTraining"/>
+    </entity>
+    <entity name="MuscleGroupName" representedClassName="MuscleGroupName" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exerciseName" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseName" inverseName="muscleGroupName" inverseEntity="ExerciseName"/>
     </entity>
     <entity name="PowerSet" representedClassName="PowerSet" syncable="YES" codeGenerationType="class">
         <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
