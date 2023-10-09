@@ -21,7 +21,14 @@
 		79A4D4E92AB767F300F48B33 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4D4E82AB767F300F48B33 /* CoordinatorView.swift */; };
 		79A4D4EB2AB7683B00F48B33 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4D4EA2AB7683B00F48B33 /* Coordinator.swift */; };
 		79A4D4ED2AB7685B00F48B33 /* MyPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4D4EC2AB7685B00F48B33 /* MyPages.swift */; };
-		79A4D4F22AB9925000F48B33 /* GroupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4D4F12AB9925000F48B33 /* GroupProtocol.swift */; };
+		79DBA8902AD0394B002E7388 /* MuscleGroupName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA88F2AD0394B002E7388 /* MuscleGroupName.swift */; };
+		79DBA8922AD03D00002E7388 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8912AD03D00002E7388 /* Category.swift */; };
+		79DBA8952AD056D5002E7388 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8942AD056D5002E7388 /* Training.swift */; };
+		79DBA8972AD05888002E7388 /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8962AD05888002E7388 /* NSManagedObjectContext.swift */; };
+		79DBA8992AD05A57002E7388 /* ExerciseName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8982AD05A57002E7388 /* ExerciseName.swift */; };
+		79DBA89B2AD05B59002E7388 /* AddingViewExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA89A2AD05B59002E7388 /* AddingViewExercises.swift */; };
+		79DBA89D2AD32E3D002E7388 /* MuscleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA89C2AD32E3D002E7388 /* MuscleGroup.swift */; };
+		79DBA8A32AD3330E002E7388 /* ExecisePower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8A22AD3330E002E7388 /* ExecisePower.swift */; };
 		79DC28422ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28412ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift */; };
 		79DC28452ACEABC40085BC4E /* TrainingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28442ACEABC40085BC4E /* TrainingViewModel.swift */; };
 		79DC28472ACEB7000085BC4E /* VerticalScrollTrainngView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28462ACEB7000085BC4E /* VerticalScrollTrainngView.swift */; };
@@ -43,7 +50,14 @@
 		79A4D4E82AB767F300F48B33 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
 		79A4D4EA2AB7683B00F48B33 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		79A4D4EC2AB7685B00F48B33 /* MyPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPages.swift; sourceTree = "<group>"; };
-		79A4D4F12AB9925000F48B33 /* GroupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupProtocol.swift; sourceTree = "<group>"; };
+		79DBA88F2AD0394B002E7388 /* MuscleGroupName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroupName.swift; sourceTree = "<group>"; };
+		79DBA8912AD03D00002E7388 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		79DBA8942AD056D5002E7388 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
+		79DBA8962AD05888002E7388 /* NSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContext.swift; sourceTree = "<group>"; };
+		79DBA8982AD05A57002E7388 /* ExerciseName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseName.swift; sourceTree = "<group>"; };
+		79DBA89A2AD05B59002E7388 /* AddingViewExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingViewExercises.swift; sourceTree = "<group>"; };
+		79DBA89C2AD32E3D002E7388 /* MuscleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroup.swift; sourceTree = "<group>"; };
+		79DBA8A22AD3330E002E7388 /* ExecisePower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecisePower.swift; sourceTree = "<group>"; };
 		79DC28412ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollMuscleView.swift; sourceTree = "<group>"; };
 		79DC28442ACEABC40085BC4E /* TrainingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewModel.swift; sourceTree = "<group>"; };
 		79DC28462ACEB7000085BC4E /* VerticalScrollTrainngView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalScrollTrainngView.swift; sourceTree = "<group>"; };
@@ -125,6 +139,7 @@
 		79A4D4EF2AB770C300F48B33 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				79DBA8932AD05693002E7388 /* Extension */,
 				79A4D4F02AB770D700F48B33 /* Enum */,
 			);
 			path = Support;
@@ -134,15 +149,29 @@
 			isa = PBXGroup;
 			children = (
 				79A4D4EC2AB7685B00F48B33 /* MyPages.swift */,
-				79A4D4F12AB9925000F48B33 /* GroupProtocol.swift */,
+				79DBA8912AD03D00002E7388 /* Category.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		79DBA8932AD05693002E7388 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				79DBA88F2AD0394B002E7388 /* MuscleGroupName.swift */,
+				79DBA8982AD05A57002E7388 /* ExerciseName.swift */,
+				79DBA8A22AD3330E002E7388 /* ExecisePower.swift */,
+				79DBA89C2AD32E3D002E7388 /* MuscleGroup.swift */,
+				79DBA8942AD056D5002E7388 /* Training.swift */,
+				79DBA8962AD05888002E7388 /* NSManagedObjectContext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		79DC28402ACEA8FE0085BC4E /* TrainingView */ = {
 			isa = PBXGroup;
 			children = (
 				79A4D4E22AB75A9F00F48B33 /* TrainingView.swift */,
+				79DBA89A2AD05B59002E7388 /* AddingViewExercises.swift */,
 				79DC28412ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift */,
 				79DC28462ACEB7000085BC4E /* VerticalScrollTrainngView.swift */,
 			);
@@ -227,22 +256,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79DBA8902AD0394B002E7388 /* MuscleGroupName.swift in Sources */,
 				793D28422AB703970039B086 /* Persistence.swift in Sources */,
 				79DC28472ACEB7000085BC4E /* VerticalScrollTrainngView.swift in Sources */,
 				79A4D4E92AB767F300F48B33 /* CoordinatorView.swift in Sources */,
 				79DC28452ACEABC40085BC4E /* TrainingViewModel.swift in Sources */,
 				79A4D4ED2AB7685B00F48B33 /* MyPages.swift in Sources */,
 				79A4D4E52AB75B1500F48B33 /* HistoryView.swift in Sources */,
+				79DBA8952AD056D5002E7388 /* Training.swift in Sources */,
 				793D283B2AB703950039B086 /* StartView.swift in Sources */,
+				79DBA89B2AD05B59002E7388 /* AddingViewExercises.swift in Sources */,
 				79DC28422ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift in Sources */,
 				793D28452AB703970039B086 /* gymNotebook.xcdatamodeld in Sources */,
 				793D284C2AB71B490039B086 /* TrainingModel.swift in Sources */,
+				79DBA8922AD03D00002E7388 /* Category.swift in Sources */,
 				79A4D4EB2AB7683B00F48B33 /* Coordinator.swift in Sources */,
+				79DBA8992AD05A57002E7388 /* ExerciseName.swift in Sources */,
+				79DBA8A32AD3330E002E7388 /* ExecisePower.swift in Sources */,
+				79DBA89D2AD32E3D002E7388 /* MuscleGroup.swift in Sources */,
 				79A4D4E02AB7583400F48B33 /* MainView.swift in Sources */,
 				79A4D4E32AB75A9F00F48B33 /* TrainingView.swift in Sources */,
+				79DBA8972AD05888002E7388 /* NSManagedObjectContext.swift in Sources */,
 				793D28392AB703950039B086 /* gymNotebookApp.swift in Sources */,
 				79A4D4E72AB75B3A00F48B33 /* CategoryView.swift in Sources */,
-				79A4D4F22AB9925000F48B33 /* GroupProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

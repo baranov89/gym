@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 class TrainingViewModel: ObservableObject {
-    
-    @Published var idCurentTraining: String?
+    @Published var currentTraining: Training?
+    @Published var currentMuscleGroup: MuscleGroup?
     @Published var trigerForScrollTo: Bool = false
     @Published var rowId: String = ""
     @Published var selectedMuscleOnHorizontalScroll: String = ""
@@ -32,8 +32,4 @@ class TrainingViewModel: ObservableObject {
     @Published var exerciseSelectedForAdd: ExerciseName?
     
     @Published var trigerBetweenMuscleAndExercise = true
-    
-    init(idCurentTraining: String?) {
-        self._idCurentTraining = Published(wrappedValue: idCurentTraining)
-    }
 }

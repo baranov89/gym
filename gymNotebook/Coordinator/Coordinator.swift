@@ -11,14 +11,14 @@ import SwiftUI
 @MainActor
 final class Coordinator: ObservableObject {
     @Published var path = NavigationPath()
-    @Published var idCurrentTraining: String?
+    @Published var currentTraining: Training?
     
     func goStartView() {
         path.removeLast(path.count)
     }
     
-    func goMainView(data: String?) {
-        idCurrentTraining = data
+    func goMainView(data: Training?) {
+        currentTraining = data
         path.append(PagesMy.main)
     }
     
@@ -28,7 +28,7 @@ final class Coordinator: ObservableObject {
         case .start :
             StartView()
         case .main :
-            MainView(idCurentTraining: idCurrentTraining)
+            MainView(currentTraining: currentTraining)
         }
     }
 }

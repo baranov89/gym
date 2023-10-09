@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct VerticalScrollTrainngView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(fetchRequest: MuscleGroup.fetch(), animation: .default)
+    private var muscleGroup: FetchedResults<MuscleGroup>
+    
+    @FetchRequest(fetchRequest: Training.fetch(), animation: .default)
+    private var training: FetchedResults<Training>
     
     @ObservedObject var vm: TrainingViewModel
     
@@ -15,11 +21,11 @@ struct VerticalScrollTrainngView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    ForEach(vm.arrayMuscle) { item in
+                    ForEach(Array(training.last?.muscleGroup as! Set<MuscleGroup>), id: \.self) { item in
                         ScrollView{
                             VStack{
-                                ForEach(item.exersice, id: \.self) { i in
-                                    Text(i)
+                                ForEach(Array(item.execisePower as! Set<ExecisePower>), id: \.self) { execise in
+                                    Text(execise.name ?? "")
                                         .frame(maxWidth: .infinity, alignment: .center)
                                         .frame(height: 50)
                                         .background(.gray.opacity(0.3))
@@ -49,6 +55,6 @@ struct VerticalScrollTrainngView: View {
 
 struct VerticalScrollTrainngView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalScrollTrainngView(vm: TrainingViewModel(idCurentTraining: ""))
+        VerticalScrollTrainngView(vm: TrainingViewModel())
     }
 }

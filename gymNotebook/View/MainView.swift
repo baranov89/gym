@@ -9,21 +9,18 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(fetchRequest: Training.fetch(), animation: .default)
+    private var training: FetchedResults<Training>
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Training.trainingDate, ascending: true)], animation: .default
-    )
-    
-    private var workouts: FetchedResults<Training>
-    var trainingViewModel: TrainingViewModel = TrainingViewModel(idCurentTraining: "")
+    var trainingViewModel: TrainingViewModel = TrainingViewModel()
     @State var selectedTag: Int = 1
-    var idCurentTraining: String?
+    var currentTraining: Training?
     
     var navTitel: String  {
         var temp: String = ""
         switch selectedTag {
         case 0 : temp = "Ctegory"
-        case 1 : temp = "\(Date().formatted(.dateTime.day().month().year()))"
+        case 1 : temp = "\((currentTraining?.trainingDate?.formatted(.dateTime.day().month().year()) ?? "jjjjj"))" 
         case 2 : temp = "History"
         default:
             return ""
@@ -65,11 +62,15 @@ struct MainView: View {
                 }
         }
         .navigationTitle(navTitel)
+        .onAppear {
+            trainingViewModel.currentTraining = self.currentTraining
+            trainingViewModel.selectedMuscleOnHorizontalScroll = trainingViewModel.arrayMuscle.first?.muscle ?? ""
+        }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(currentTraining: Training())
     }
 }

@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct TrainingView: View {
-    
+
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \ExerciseName.name, ascending: true)], animation: .default
-    )
+    @FetchRequest(fetchRequest: ExerciseName.fetch(), animation: .default)
     private var exerciseName: FetchedResults<ExerciseName>
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \MuscleGroupName.name, ascending: true)], animation: .default
-    )
+    @FetchRequest(fetchRequest: MuscleGroupName.fetch(), animation: .default)
     private var muscleGroupName: FetchedResults<MuscleGroupName>
+    
+    @FetchRequest(fetchRequest: ExecisePower.fetch(), animation: .default)
+    private var execisePower: FetchedResults<ExecisePower>
     
     @ObservedObject var vm: TrainingViewModel
     
@@ -99,68 +98,15 @@ struct TrainingView: View {
                 Divider()
             }
             .zIndex(1)
-            VStack{
-                if vm.pushedAddButton {
-                    VStack {
-                        Text(vm.trigerBetweenMuscleAndExercise ? "выберите группу мышц" : "выберите упражнение")
-                            .font(.system(size: 22))
-                            .padding(.top, 10)
-                        Spacer()
-                        Button(action: {
-                            
-                        }, label: {
-                            VStack {
-                                if vm.trigerBetweenMuscleAndExercise {
-                                    ForEach(muscleGroupName) { muscle in
-                                        Text(muscle.name ?? "")
-                                            .font(.system(size: 22))
-                                            .padding(.vertical, 5)
-                                            .onTapGesture {
-                                                vm.muscleGroupSelectedForAdd = muscle
-                                                vm.trigerBetweenMuscleAndExercise.toggle()
-                                            }
-                                    }
-                                }
-                                else {
-                                    ForEach(exerciseName) { exercise in
-                                        if exercise.muscleGroupName!.name == vm.muscleGroupSelectedForAdd!.name {
-                                            Text(exercise.name ?? "")
-                                                .font(.system(size: 22))
-                                                .padding(.vertical, 5)
-                                                .onTapGesture {
-                                                    vm.exerciseSelectedForAdd = exercise
-                                                    withAnimation {
-                                                        vm.pushedAddButton.toggle()
-                                                    }
-                                                    vm.trigerBetweenMuscleAndExercise.toggle()
-                                                }
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                        Spacer()
-                    }
-                    .frame(width: UIScreen.main.bounds.width - 16, height: UIScreen.main.bounds.height * 0.4)
-                    .background(.white)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(.black, lineWidth: 1)
-                    )
-                    .transition(.move(edge: .trailing))
-                }
-            }
-            .zIndex(2)
+            AddingViewExercises(vm: vm)
+                .zIndex(2)
         }
     }
 }
 
 struct TrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        TrainingView(vm: TrainingViewModel(idCurentTraining: ""))
+        TrainingView(vm: TrainingViewModel())
     }
 }
 
-enum Categiry: String {
-    case cardio, power
-}

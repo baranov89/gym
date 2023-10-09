@@ -11,79 +11,88 @@ import CoreData
 struct StartView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var coordinator: Coordinator
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \MuscleGroupName.name, ascending: true)], animation: .default
-    )
+    
+    @FetchRequest(fetchRequest: MuscleGroupName.fetch(), animation: .default)
     private var muscleGroupName: FetchedResults<MuscleGroupName>
-    @State var idCurrentTraining: String?
+    
+    @FetchRequest(fetchRequest: Training.fetch(), animation: .default)
+    private var training: FetchedResults<Training>
+    
+    @FetchRequest(fetchRequest: MuscleGroup.fetch(), animation: .default)
+    private var muscleGroup: FetchedResults<MuscleGroup>
+    
+    @State var currentTraining: Training?
     
     var body: some View {
-            VStack {
-                Spacer()
-                Button {
-                    idCurrentTraining = "asdasd"
-                    goMainView()
-                } label: {
-                        Text("new")
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50).background(.blue)
-                            .cornerRadius(15)
-                            .padding()
-                }
-                Button {
-                    idCurrentTraining = "ascxdasd"
-                    goMainView()
-                } label: {
-                    Text("continue")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50).background(.blue)
-                        .cornerRadius(15)
-                        .padding(.horizontal)
-                }
-                
-                Button {
-                    idCurrentTraining = "asdasd"
-                    goMainView()
-                } label: {
-                        Text("open")
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50).background(.blue)
-                            .cornerRadius(15)
-                            .padding()
-                }
+        VStack {
+            Spacer()
+            Button {
+                currentTraining = addTraining()
+                goMainView()
+            } label: {
+                Text("new")
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50).background(.blue)
+                    .cornerRadius(15)
+                    .padding()
             }
-            .onAppear{
-//                deleteAllEntities()
-//                addMuscleGroup(name: "руки")
-//                addExercise(name: "становая", muscleGroupArray: muscleGroupName, muclseGroupName: "руки")
-//                addExercise(name: "тренажер", muscleGroupArray: muscleGroupName, muclseGroupName: "руки")
-//                addExercise(name: "гири", muscleGroupArray: muscleGroupName, muclseGroupName: "руки")
-//                addExercise(name: "штанга", muscleGroupArray: muscleGroupName, muclseGroupName: "руки")
+            Button {
+                currentTraining = training.last
+                goMainView()
+            } label: {
+                Text("continue")
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50).background(.blue)
+                    .cornerRadius(15)
+                    .padding(.horizontal)
             }
+            Button {
+                currentTraining = addTraining()
+                goMainView()
+            } label: {
+                Text("open")
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50).background(.blue)
+                    .cornerRadius(15)
+                    .padding()
+            }
+        }
+        .onAppear{
+//                            deleteAllEntities()
+            //                addMuscleGroupName(name: "ноги")
+            //                addExerciseName(name: "присяд", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
+            //                addExerciseName(name: "жиим на тренажере", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
+            //                addExerciseName(name: "прыжки на куб", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
+            //                addExerciseName(name: "выпады", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
+        }
     }
     
     func goMainView() {
-        coordinator.goMainView(data: idCurrentTraining)
+        coordinator.goMainView(data: currentTraining)
     }
     
-    private func addMuscleGroup(name : String) {
-            withAnimation {
-                let muscleGroupName = MuscleGroupName(context: viewContext)
-                muscleGroupName.name = name
-    
-                do {
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-            }
+    func addTraining() -> Training {
+        let training = Training(context: viewContext)
+        withAnimation {
+            training.id = UUID().uuidString
+            training.trainingDate = Date()
+            viewContext.saveContext()
         }
+        return training
+    }
     
-    private func addExercise(name : String, muscleGroupArray: FetchedResults<MuscleGroupName>, muclseGroupName: String) {
+    func addMuscleGroupName(name : String) {
+        withAnimation {
+            let muscleGroupName = MuscleGroupName(context: viewContext)
+            muscleGroupName.name = name
+            viewContext.saveContext()
+        }
+    }
+    
+    func addExerciseName(name : String, muscleGroupArray: FetchedResults<MuscleGroupName>, muclseGroupName: String) {
         var muscleGroup: MuscleGroupName
         for i in muscleGroupArray {
             if i.name == muclseGroupName {
@@ -92,51 +101,44 @@ struct StartView: View {
                     let exercise = ExerciseName(context: viewContext)
                     exercise.name = name
                     exercise.muscleGroupName = muscleGroup
-                    do {
-                        try viewContext.save()
-                    } catch {
-                        let nsError = error as NSError
-                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                    }
+                    viewContext.saveContext()
                 }
             }
         }
-        
-            
-        }
-    
-    func deleteAllEntities() {
-        for i in muscleGroupName {
-            do {
-                viewContext.delete(i)
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-            
-        }
-        
     }
     
-//        private func deleteItems(offsets: IndexSet) {
-//            withAnimation {
-//                offsets.map { items[$0] }.forEach(viewContext.delete)
-//    
+    func deleteAllEntities() {
+//        if !muscleGroupName.isEmpty {
+//            for i in muscleGroupName {
 //                do {
-//                    try viewContext.save()
-//                } catch {
-//                    // Replace this implementation with code to handle the error appropriately.
-//                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                    let nsError = error as NSError
-//                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//                    viewContext.delete(i)
+//                    viewContext.saveContext()
 //                }
 //            }
 //        }
+        if !training.isEmpty {
+            print("dsdsdsdsdsd")
+            for i in training {
+                do {
+                    viewContext.delete(i)
+                    viewContext.saveContext()
+                }
+            }
+        }
+        if !muscleGroup.isEmpty {
+            print("dsdsdsdsdsd")
+            for i in muscleGroup {
+                do {
+                    viewContext.delete(i)
+                    viewContext.saveContext()
+                }
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView(idCurrentTraining: "asd").environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        StartView(currentTraining: Training()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
