@@ -30,6 +30,8 @@ struct StartView: View {
     @State var currentTraining: Training?
     @State var trigerWorkoutSelectionView: Bool = false
     
+    @State var height: CGFloat = 0.0
+    
     var body: some View {
         ZStack {
             VStack {
@@ -71,43 +73,45 @@ struct StartView: View {
                 }
             }
             .zIndex(1.0)
-            VStack {
+            VStack{
                 if trigerWorkoutSelectionView {
+                    Spacer()
                     VStack {
                         Spacer()
                     }
                     .frame(width: UIScreen.main.bounds.width)
                     .background(.white)
+                    .padding(.bottom, 2)
                     .onTapGesture {
                         withAnimation {
                             trigerWorkoutSelectionView = false
                         }
                     }
-                }
-            }
-            .zIndex(2.0)
-            VStack{
-                Spacer()
-                if trigerWorkoutSelectionView {
                     VStack {
                         Text("Выберите тренировку")
-                            .padding(.top, 5)
-                        Spacer()
+                            .font(.system(size: 24))
+                            .padding(.top)
+                       
                         ScrollView(showsIndicators: false) {
-                                ForEach(training) { item in
-                                    Button {
-                                        currentTraining = item
-                                        goMainView()
-                                        trigerWorkoutSelectionView = false
-                                    } label: {
+                            ForEach(training) { item in
+                                Button {
+                                    currentTraining = item
+                                    goMainView()
+                                    trigerWorkoutSelectionView = false
+                                } label: {
+                                    ChildSizeReader(size: $height) {
                                         Text("\((item.trainingDate?.formatted(.dateTime.day().month().year()) ?? ""))" )
+                                            .font(.system(size: 22))
                                             .padding(.vertical, 3)
                                     }
                                 }
+                            }
                         }
-                        Spacer()
+                        .padding()
+                        .scrollDisabled(training.count < 10)
+                        .frame(height: (height + 6) * CGFloat(training.count))
                     }
-                    .frame(width: UIScreen.main.bounds.width - 16, height: UIScreen.main.bounds.height * 0.4)
+                    .frame(width: UIScreen.main.bounds.width - 16)
                     .background(.white)
                     .overlay(
                         RoundedRectangle(cornerRadius: 30)
@@ -116,7 +120,7 @@ struct StartView: View {
                     .transition(.move(edge: .trailing))
                 }
             }
-            .zIndex(3.0)
+            .zIndex(2.0)
         }
         .onAppear{
 //            deleteAllEntities()
@@ -222,6 +226,34 @@ struct StartView: View {
                     viewContext.saveContext()
                 }
             }
+        }
+    }
+}
+
+private struct HeightPreferenceKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat,
+                       nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+struct ChildSizeReader<Content: View>: View {
+    @Binding var size: CGFloat
+    let content: () -> Content
+    var body: some View {
+        ZStack {
+            content()
+                .background(
+                    GeometryReader { proxy in
+                        Color.clear
+                            .preference(key: HeightPreferenceKey.self, value: proxy.size.height)
+                    }
+                )
+        }
+        .onPreferenceChange(HeightPreferenceKey.self) { preferences in
+            self.size = preferences
         }
     }
 }

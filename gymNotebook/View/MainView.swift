@@ -12,7 +12,7 @@ struct MainView: View {
     @FetchRequest(fetchRequest: Training.fetch(), animation: .default)
     private var training: FetchedResults<Training>
     
-    var trainingViewModel: TrainingViewModel = TrainingViewModel()
+    @ObservedObject var trainingViewModel: TrainingViewModel = TrainingViewModel()
     @State var selectedTag: Int = 1
     var currentTraining: Training?
     
@@ -29,39 +29,39 @@ struct MainView: View {
     }
     
     var body: some View {
-        TabView(selection: $selectedTag) {
-            CategoryView()
-                .tag(0)
-                .tabItem {
-                    Button {
-                        selectedTag = 0
-                    } label: {
-                        Label("категории", systemImage: "square.and.pencil")
-                    }
-                }
-            TrainingView(vm: trainingViewModel)
-                .tag(1)
-                .tabItem {
-                    Button {
-                        if selectedTag == 1 {
-                        } else {
-                            selectedTag = 1
+            TabView(selection: $selectedTag) {
+                CategoryView()
+                    .tag(0)
+                    .tabItem {
+                        Button {
+                            selectedTag = 0
+                        } label: {
+                            Label("категории", systemImage: "square.and.pencil")
                         }
-                    } label: {
-                        Label("тренировка", systemImage: "dumbbell.fill")
                     }
-                }
-            HistoryView()
-                .tag(2)
-                .tabItem {
-                    Button {
-                        selectedTag = 2
-                    } label: {
-                        Label("история", systemImage:  "doc.text.magnifyingglass")
+                TrainingView(vm: trainingViewModel)
+                    .tag(1)
+                    .tabItem {
+                        Button {
+                            if selectedTag == 1 {
+                            } else {
+                                selectedTag = 1
+                            }
+                        } label: {
+                            Label("тренировка", systemImage: "dumbbell.fill")
+                        }
                     }
-                }
-        }
-        .navigationTitle(navTitel)
+                HistoryView()
+                    .tag(2)
+                    .tabItem {
+                        Button {
+                            selectedTag = 2
+                        } label: {
+                            Label("история", systemImage:  "doc.text.magnifyingglass")
+                        }
+                    }
+            }
+            .navigationTitle(navTitel)
         .onAppear {
             trainingViewModel.currentTraining = currentTraining
             trainingViewModel.selectedMuscleOnHorizontalScroll = Array(currentTraining?.muscleGroup as! Set<MuscleGroup>).first

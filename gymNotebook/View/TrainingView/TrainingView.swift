@@ -101,12 +101,13 @@ struct TrainingView: View {
             AddingViewExercises(vm: vm)
                 .zIndex(2)
         }
+        .zIndex(2)
     }
 }
 
-struct TrainingView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrainingView(vm: TrainingViewModel())
-    }
-}
+//struct TrainingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TrainingView(vm: TrainingViewModel())
+//    }
+//}
 
