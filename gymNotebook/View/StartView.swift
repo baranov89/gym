@@ -22,7 +22,7 @@ struct StartView: View {
     private var muscleGroup: FetchedResults<MuscleGroup>
     
     @State var currentTraining: Training?
-    @State var triger: Bool = false
+    @State var trigerWorkoutSelectionView: Bool = false
     
     var body: some View {
         ZStack {
@@ -51,7 +51,10 @@ struct StartView: View {
                         .padding(.horizontal)
                 }
                 Button {
-                    triger = true
+                    withAnimation {
+                        trigerWorkoutSelectionView = true
+                    }
+                    
                 } label: {
                     Text("open")
                         .foregroundColor(.white)
@@ -62,19 +65,41 @@ struct StartView: View {
                 }
             }
             .zIndex(1.0)
+            VStack {
+                if trigerWorkoutSelectionView {
+                    VStack {
+                        Spacer()
+                    }
+                    .frame(width: UIScreen.main.bounds.width)
+                    .background(.white)
+                    .onTapGesture {
+                        withAnimation {
+                            trigerWorkoutSelectionView = false
+                        }
+                    }
+                }
+            }
+            .zIndex(2.0)
             VStack{
                 Spacer()
-                if triger {
-                    VStack{
-                        ForEach(training) { item in
-                            Button {
-                                currentTraining = item
-                                goMainView()
-                                triger = false
-                            } label: {
-                                Text("\((item.trainingDate?.formatted(.dateTime.day().month().year()) ?? ""))" )
-                            }
+                if trigerWorkoutSelectionView {
+                    VStack {
+                        Text("Выберите тренировку")
+                            .padding(.top, 5)
+                        Spacer()
+                        ScrollView(showsIndicators: false) {
+                                ForEach(training) { item in
+                                    Button {
+                                        currentTraining = item
+                                        goMainView()
+                                        trigerWorkoutSelectionView = false
+                                    } label: {
+                                        Text("\((item.trainingDate?.formatted(.dateTime.day().month().year()) ?? ""))" )
+                                            .padding(.vertical, 3)
+                                    }
+                                }
                         }
+                        Spacer()
                     }
                     .frame(width: UIScreen.main.bounds.width - 16, height: UIScreen.main.bounds.height * 0.4)
                     .background(.white)
@@ -85,7 +110,7 @@ struct StartView: View {
                     .transition(.move(edge: .trailing))
                 }
             }
-            .zIndex(2.0)
+            .zIndex(3.0)
         }
         .onAppear{
 //                            deleteAllEntities()
