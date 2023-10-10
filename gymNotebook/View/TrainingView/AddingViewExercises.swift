@@ -36,34 +36,47 @@ struct AddingViewExercises: View {
                     }, label: {
                         VStack {
                             if vm.trigerBetweenMuscleAndExercise {
-                                ForEach(muscleGroupName) { muscle in
-                                    Text(muscle.name ?? "")
-                                        .font(.system(size: 22))
-                                        .padding(.vertical, 5)
-                                        .onTapGesture {
-                                            vm.muscleGroupSelectedForAdd = muscle
-                                            vm.trigerBetweenMuscleAndExercise.toggle()
-                                        }
-                                }
-                            }
-                            else {
-                                ForEach(exerciseName) { execise in
-                                    if execise.muscleGroupName!.name == vm.muscleGroupSelectedForAdd!.name {
-                                        Text(execise.name ?? "")
+                                ScrollView(showsIndicators: false) {
+                                    ForEach(muscleGroupName) { muscle in
+                                        Text(muscle.name ?? "")
                                             .font(.system(size: 22))
                                             .padding(.vertical, 5)
                                             .onTapGesture {
-                                                vm.exerciseSelectedForAdd = execise
-                                                vm.currentMuscleGroup = addMuscleGroup(name: vm.muscleGroupSelectedForAdd?.name)
-                                                addExercise()
-                                                withAnimation {
-                                                    vm.pushedAddButton.toggle()
-                                                    vm.selectedMuscleOnHorizontalScroll = vm.currentMuscleGroup
-                                                    vm.trigerForScrollTo.toggle()
-                                                }
+                                                vm.muscleGroupSelectedForAdd = muscle
                                                 vm.trigerBetweenMuscleAndExercise.toggle()
                                             }
                                     }
+                                }
+                            }
+                            else {
+                                ScrollView(showsIndicators: false) {
+                                    ForEach(exerciseName) { execise in
+                                        if execise.muscleGroupName!.name == vm.muscleGroupSelectedForAdd!.name {
+                                            Text(execise.name ?? "")
+                                                .font(.system(size: 22))
+                                                .padding(.vertical, 5)
+                                                .foregroundColor(execise.hasAlready ? .gray : .blue)
+                                                .onTapGesture {
+                                                    if !execise.hasAlready {
+                                                        vm.exerciseSelectedForAdd = execise
+                                                        vm.currentMuscleGroup = addMuscleGroup(name: vm.muscleGroupSelectedForAdd?.name)
+                                                        addExercise(id: execise.id!)
+                                                        withAnimation {
+                                                            vm.pushedAddButton.toggle()
+                                                            vm.selectedMuscleOnHorizontalScroll = vm.currentMuscleGroup
+                                                            vm.trigerForScrollTo.toggle()
+                                                        }
+                                                        vm.trigerBetweenMuscleAndExercise.toggle()
+                                                        execise.hasAlready = true
+                                                    }
+                                                }
+                                        }
+                                    }
+                                }
+                                Button {
+                                    vm.trigerBetweenMuscleAndExercise.toggle()
+                                } label: {
+                                    Text("назад")
                                 }
                             }
                         }
@@ -103,12 +116,13 @@ struct AddingViewExercises: View {
         return result
     }
     
-    func addExercise() {
+    func addExercise(id: String) {
         switch vm.currentCategiry {
         case .power:
             let execise = ExecisePower(context: viewContext)
             withAnimation {
                 execise.name = vm.exerciseSelectedForAdd?.name
+                execise.id = id
                 execise.muscleGroup = vm.currentMuscleGroup
                 viewContext.saveContext()
             }

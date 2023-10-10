@@ -21,6 +21,12 @@ struct StartView: View {
     @FetchRequest(fetchRequest: MuscleGroup.fetch(), animation: .default)
     private var muscleGroup: FetchedResults<MuscleGroup>
     
+    @FetchRequest(fetchRequest: ExecisePower.fetch(), animation: .default)
+    private var execisePower: FetchedResults<ExecisePower>
+    
+    @FetchRequest(fetchRequest: ExerciseName.fetch(), animation: .default)
+    private var exerciseName: FetchedResults<ExerciseName>
+    
     @State var currentTraining: Training?
     @State var trigerWorkoutSelectionView: Bool = false
     
@@ -113,17 +119,46 @@ struct StartView: View {
             .zIndex(3.0)
         }
         .onAppear{
-//                            deleteAllEntities()
-            //                addMuscleGroupName(name: "ноги")
-            //                addExerciseName(name: "присяд", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
-            //                addExerciseName(name: "жиим на тренажере", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
-            //                addExerciseName(name: "прыжки на куб", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
-            //                addExerciseName(name: "выпады", muscleGroupArray: muscleGroupName, muclseGroupName: "ноги")
+//            deleteAllEntities()
+            if muscleGroupName.isEmpty {
+                addCategories()
+            }
+        }
+    }
+    
+    func addCategories() {
+        let arrayMuscleGroup = ["спина", "грудь", "руки", "ноги", "бицепс", "трицепс"]
+        let arrayExecise = ["присяд", "жиим на тренажере", "прыжки на куб", "выпады"]
+        for muscleGroup in arrayMuscleGroup {
+            addMuscleGroupName(name: muscleGroup)
+            for execise in arrayExecise {
+                addExeciseName(name: execise, muscleGroupArray: muscleGroupName, muclseGroupName: muscleGroup)
+            }
         }
     }
     
     func goMainView() {
+        setFlagOnExeciseName()
+        checkTheExercisesStatus()
         coordinator.goMainView(data: currentTraining)
+    }
+    
+    func setFlagOnExeciseName() {
+        for execiseName in exerciseName {
+            execiseName.hasAlready = false
+        }
+    }
+    
+    func checkTheExercisesStatus() {
+        for execise in execisePower {
+            if execise.muscleGroup?.training?.id == currentTraining?.id {
+                for execiseName in exerciseName {
+                    if execiseName.id == execise.id {
+                        execiseName.hasAlready = true
+                    }
+                }
+            }
+        }
     }
     
     func addTraining() -> Training {
@@ -144,15 +179,17 @@ struct StartView: View {
         }
     }
     
-    func addExerciseName(name : String, muscleGroupArray: FetchedResults<MuscleGroupName>, muclseGroupName: String) {
+    func addExeciseName(name : String, muscleGroupArray: FetchedResults<MuscleGroupName>, muclseGroupName: String) {
         var muscleGroup: MuscleGroupName
         for i in muscleGroupArray {
             if i.name == muclseGroupName {
                 muscleGroup = i
                 withAnimation {
-                    let exercise = ExerciseName(context: viewContext)
-                    exercise.name = name
-                    exercise.muscleGroupName = muscleGroup
+                    let execise = ExerciseName(context: viewContext)
+                    execise.name = name
+                    execise.id = UUID().uuidString
+                    execise.hasAlready = false
+                    execise.muscleGroupName = muscleGroup
                     viewContext.saveContext()
                 }
             }
@@ -160,14 +197,14 @@ struct StartView: View {
     }
     
     func deleteAllEntities() {
-//        if !muscleGroupName.isEmpty {
-//            for i in muscleGroupName {
-//                do {
-//                    viewContext.delete(i)
-//                    viewContext.saveContext()
-//                }
-//            }
-//        }
+        if !muscleGroupName.isEmpty {
+            for i in muscleGroupName {
+                do {
+                    viewContext.delete(i)
+                    viewContext.saveContext()
+                }
+            }
+        }
         if !training.isEmpty {
             print("dsdsdsdsdsd")
             for i in training {

@@ -9,14 +9,11 @@ import SwiftUI
 
 struct HistoryView: View {
     var body: some View {
-//        NavigationStack{
-            VStack{
-                Text("история")
-            }
-//        }
-        
+        VStack{
+            Text("история")
+        }
     }
-        
+    
 }
 
 struct HistoryView_Previews: PreviewProvider {

@@ -26,6 +26,8 @@
         <relationship name="powerSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PowerSet" inverseName="execisePower" inverseEntity="PowerSet"/>
     </entity>
     <entity name="ExerciseName" representedClassName="ExerciseName" syncable="YES" codeGenerationType="class">
+        <attribute name="hasAlready" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="muscleGroupName" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroupName" inverseName="exerciseName" inverseEntity="MuscleGroupName"/>
     </entity>
