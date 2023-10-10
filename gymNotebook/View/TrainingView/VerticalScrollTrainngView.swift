@@ -21,7 +21,7 @@ struct VerticalScrollTrainngView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    ForEach(Array(training.last?.muscleGroup as! Set<MuscleGroup>), id: \.self) { item in
+                    ForEach(Array(vm.currentTraining?.muscleGroup as! Set<MuscleGroup>), id: \.self) { item in
                         ScrollView{
                             VStack{
                                 ForEach(Array(item.execisePower as! Set<ExecisePower>), id: \.self) { execise in
@@ -41,11 +41,11 @@ struct VerticalScrollTrainngView: View {
                 }
                 .onChange(of: vm.trigerForScrollTo, perform:  { _ in
                     withAnimation {
-                        proxy.scrollTo(vm.rowId)
+                        proxy.scrollTo(vm.selectedMuscleOnHorizontalScroll?.id)
                     }
                 })
                 .onAppear {
-                    proxy.scrollTo(vm.rowId)
+                    proxy.scrollTo(vm.selectedMuscleOnHorizontalScroll?.id)
                 }
             }
             .scrollDisabled(true)

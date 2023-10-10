@@ -58,10 +58,9 @@ struct AddingViewExercises: View {
                                                 addExercise()
                                                 withAnimation {
                                                     vm.pushedAddButton.toggle()
-                                                    vm.rowId = (vm.currentMuscleGroup?.id)!
+                                                    vm.selectedMuscleOnHorizontalScroll = vm.currentMuscleGroup
                                                     vm.trigerForScrollTo.toggle()
                                                 }
-                                                vm.selectedMuscleOnHorizontalScroll = (vm.muscleGroupSelectedForAdd?.name)!
                                                 vm.trigerBetweenMuscleAndExercise.toggle()
                                             }
                                     }

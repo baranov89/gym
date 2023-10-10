@@ -22,43 +22,70 @@ struct StartView: View {
     private var muscleGroup: FetchedResults<MuscleGroup>
     
     @State var currentTraining: Training?
+    @State var triger: Bool = false
     
     var body: some View {
-        VStack {
-            Spacer()
-            Button {
-                currentTraining = addTraining()
-                goMainView()
-            } label: {
-                Text("new")
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50).background(.blue)
-                    .cornerRadius(15)
-                    .padding()
+        ZStack {
+            VStack {
+                Spacer()
+                Button {
+                    currentTraining = addTraining()
+                    goMainView()
+                } label: {
+                    Text("new")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50).background(.blue)
+                        .cornerRadius(15)
+                        .padding()
+                }
+                Button {
+                    currentTraining = training.last
+                    goMainView()
+                } label: {
+                    Text("continue")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50).background(.blue)
+                        .cornerRadius(15)
+                        .padding(.horizontal)
+                }
+                Button {
+                    triger = true
+                } label: {
+                    Text("open")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50).background(.blue)
+                        .cornerRadius(15)
+                        .padding()
+                }
             }
-            Button {
-                currentTraining = training.last
-                goMainView()
-            } label: {
-                Text("continue")
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50).background(.blue)
-                    .cornerRadius(15)
-                    .padding(.horizontal)
+            .zIndex(1.0)
+            VStack{
+                Spacer()
+                if triger {
+                    VStack{
+                        ForEach(training) { item in
+                            Button {
+                                currentTraining = item
+                                goMainView()
+                                triger = false
+                            } label: {
+                                Text("\((item.trainingDate?.formatted(.dateTime.day().month().year()) ?? ""))" )
+                            }
+                        }
+                    }
+                    .frame(width: UIScreen.main.bounds.width - 16, height: UIScreen.main.bounds.height * 0.4)
+                    .background(.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(.black, lineWidth: 1)
+                    )
+                    .transition(.move(edge: .trailing))
+                }
             }
-            Button {
-                currentTraining = addTraining()
-                goMainView()
-            } label: {
-                Text("open")
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50).background(.blue)
-                    .cornerRadius(15)
-                    .padding()
-            }
+            .zIndex(2.0)
         }
         .onAppear{
 //                            deleteAllEntities()

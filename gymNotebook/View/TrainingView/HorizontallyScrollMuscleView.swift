@@ -21,32 +21,27 @@ struct HorizontallyScrollMuscleView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    ForEach(Array(training.last?.muscleGroup as! Set<MuscleGroup>), id: \.self ) { data in
+                    ForEach(Array(vm.currentTraining?.muscleGroup as! Set<MuscleGroup>), id: \.self ) { data in
                         Text(data.name ?? "")
                             .font(.system(size: 22))
-                            .foregroundColor(vm.selectedMuscleOnHorizontalScroll == data.name ? .white : .black)
+                            .foregroundColor(vm.selectedMuscleOnHorizontalScroll?.name == data.name ? .white : .black)
                             .padding(.horizontal)
                             .frame(height: 30)
-                            .background(vm.selectedMuscleOnHorizontalScroll == data.name ? .gray : .clear)
+                            .background(vm.selectedMuscleOnHorizontalScroll?.name == data.name ? .gray : .clear)
                             .cornerRadius(10)
                             .id(data.name)
                             .onTapGesture {
-                                vm.selectedMuscleOnHorizontalScroll = data.name!
-                                vm.trigerForScrollTo.toggle()
-                                for muscle in muscleGroup {
-                                    if muscle.name == data.name {
-                                        vm.rowId = muscle.id!
-                                    }
-                                }
+                                vm.selectedMuscleOnHorizontalScroll = data
+                                    vm.trigerForScrollTo.toggle()
                             }
                     }
                 }
                 .animation(.bouncy(), value: vm.selectedMuscleOnHorizontalScroll)
                 .padding(.horizontal)
             }
-            .onChange(of: vm.selectedMuscleOnHorizontalScroll, perform: { _ in
+            .onChange(of: vm.trigerForScrollTo, perform: { _ in
                 withAnimation {
-                    proxy.scrollTo(vm.selectedMuscleOnHorizontalScroll, anchor: .center)
+                    proxy.scrollTo(vm.selectedMuscleOnHorizontalScroll?.name, anchor: .center)
                 }
             })
         }

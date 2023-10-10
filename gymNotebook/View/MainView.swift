@@ -63,8 +63,8 @@ struct MainView: View {
         }
         .navigationTitle(navTitel)
         .onAppear {
-            trainingViewModel.currentTraining = self.currentTraining
-            trainingViewModel.selectedMuscleOnHorizontalScroll = trainingViewModel.arrayMuscle.first?.muscle ?? ""
+            trainingViewModel.currentTraining = currentTraining
+            trainingViewModel.selectedMuscleOnHorizontalScroll = Array(currentTraining?.muscleGroup as! Set<MuscleGroup>).first
         }
     }
 }
