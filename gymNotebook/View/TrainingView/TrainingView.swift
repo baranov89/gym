@@ -101,7 +101,6 @@ struct TrainingView: View {
             AddingViewExercises(vm: vm)
                 .zIndex(2)
         }
-        .zIndex(2)
     }
 }
 

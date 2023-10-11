@@ -76,22 +76,11 @@ struct StartView: View {
             VStack{
                 if trigerWorkoutSelectionView {
                     Spacer()
-                    VStack {
-                        Spacer()
-                    }
-                    .frame(width: UIScreen.main.bounds.width)
-                    .background(.white)
-                    .padding(.bottom, 2)
-                    .onTapGesture {
-                        withAnimation {
-                            trigerWorkoutSelectionView = false
-                        }
-                    }
-                    VStack {
+                    VStack(spacing: 0) {
                         Text("Выберите тренировку")
                             .font(.system(size: 24))
-                            .padding(.top)
-                       
+                            .padding(.bottom)
+                        Divider()
                         ScrollView(showsIndicators: false) {
                             ForEach(training) { item in
                                 Button {
@@ -99,18 +88,37 @@ struct StartView: View {
                                     goMainView()
                                     trigerWorkoutSelectionView = false
                                 } label: {
-                                    ChildSizeReader(size: $height) {
-                                        Text("\((item.trainingDate?.formatted(.dateTime.day().month().year()) ?? ""))" )
-                                            .font(.system(size: 22))
-                                            .padding(.vertical, 3)
+                                    HStack{
+                                        if self.training.last?.id == item.id {
+                                            Text("last ")
+                                                .font(.system(size: 22))
+                                                .padding(.vertical, 3)
+                                        }
+                                        ChildSizeReader(height: $height) {
+                                            Text("\((item.trainingDate?.formatted(.dateTime.day().month().year()) ?? ""))" )
+                                                .font(.system(size: 22))
+                                                .padding(.vertical, 3)
+                                        }
                                     }
                                 }
                             }
+                            .padding(.top, 3)
+                            .padding(.vertical, 3)
                         }
-                        .padding()
-                        .scrollDisabled(training.count < 10)
-                        .frame(height: (height + 6) * CGFloat(training.count))
+                        .scrollDisabled(training.count < 8)
+                        .frame(height: (height + 10) * (training.count < 8 ? CGFloat(training.count) : 7))
+                        Divider()
+                        Button {
+                            withAnimation {
+                                trigerWorkoutSelectionView = false
+                            }
+                        } label: {
+                            Text("отмена")
+                                .font(.system(size: 22))
+                                .padding(.top)
+                        }
                     }
+                    .padding()
                     .frame(width: UIScreen.main.bounds.width - 16)
                     .background(.white)
                     .overlay(
@@ -201,14 +209,14 @@ struct StartView: View {
     }
     
     func deleteAllEntities() {
-        if !muscleGroupName.isEmpty {
-            for i in muscleGroupName {
-                do {
-                    viewContext.delete(i)
-                    viewContext.saveContext()
-                }
-            }
-        }
+//        if !muscleGroupName.isEmpty {
+//            for i in muscleGroupName {
+//                do {
+//                    viewContext.delete(i)
+//                    viewContext.saveContext()
+//                }
+//            }
+//        }
         if !training.isEmpty {
             print("dsdsdsdsdsd")
             for i in training {
@@ -226,34 +234,6 @@ struct StartView: View {
                     viewContext.saveContext()
                 }
             }
-        }
-    }
-}
-
-private struct HeightPreferenceKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat,
-                       nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
-struct ChildSizeReader<Content: View>: View {
-    @Binding var size: CGFloat
-    let content: () -> Content
-    var body: some View {
-        ZStack {
-            content()
-                .background(
-                    GeometryReader { proxy in
-                        Color.clear
-                            .preference(key: HeightPreferenceKey.self, value: proxy.size.height)
-                    }
-                )
-        }
-        .onPreferenceChange(HeightPreferenceKey.self) { preferences in
-            self.size = preferences
         }
     }
 }

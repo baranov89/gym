@@ -22,68 +22,92 @@ struct AddingViewExercises: View {
     private var execisePower: FetchedResults<ExecisePower>
     
     @ObservedObject var vm: TrainingViewModel
+    @State var height: CGFloat = 0.0
     
     var body: some View {
         VStack{
+            Spacer()
             if vm.pushedAddButton {
-                VStack {
+                VStack(spacing: 0) {
                     Text(vm.trigerBetweenMuscleAndExercise ? "выберите группу мышц" : "выберите упражнение")
-                        .font(.system(size: 22))
-                        .padding(.top, 10)
-                    Spacer()
+                        .font(.system(size: 24))
+                        .padding(.vertical)
+                    Divider()
+                        .padding(.horizontal)
                     Button(action: {
                         
                     }, label: {
-                        VStack {
+                        VStack(spacing: 0)  {
                             if vm.trigerBetweenMuscleAndExercise {
-                                ScrollView(showsIndicators: false) {
-                                    ForEach(muscleGroupName) { muscle in
-                                        Text(muscle.name ?? "")
-                                            .font(.system(size: 22))
-                                            .padding(.vertical, 5)
-                                            .onTapGesture {
-                                                vm.muscleGroupSelectedForAdd = muscle
-                                                vm.trigerBetweenMuscleAndExercise.toggle()
+                                VStack(spacing: 0) {
+                                    ScrollView(showsIndicators: false) {
+                                        ForEach(muscleGroupName) { muscle in
+                                            ChildSizeReader(height: $height) {
+                                                Text(muscle.name ?? "")
+                                                    .font(.system(size: 22))
+                                                    .padding(.vertical, 3)
+                                                    .onTapGesture {
+                                                        vm.muscleGroupSelectedForAdd = muscle
+                                                        vm.trigerBetweenMuscleAndExercise.toggle()
+                                                    }
                                             }
+                                        }
+                                    }
+                                    .scrollDisabled(muscleGroupName.count < 8)
+                                    .frame(height: (height + 10) * (muscleGroupName.count < 8 ? CGFloat(muscleGroupName.count) : 7))
+                                    Divider()
+                                    Button {
+                                        vm.pushedAddButton.toggle()
+                                    } label: {
+                                        Text("отмена")
+                                            .font(.system(size: 22))
+                                            .padding(.top)
                                     }
                                 }
                             }
                             else {
-                                ScrollView(showsIndicators: false) {
-                                    ForEach(exerciseName) { execise in
-                                        if execise.muscleGroupName!.name == vm.muscleGroupSelectedForAdd!.name {
-                                            Text(execise.name ?? "")
-                                                .font(.system(size: 22))
-                                                .padding(.vertical, 5)
-                                                .foregroundColor(execise.hasAlready ? .gray : .blue)
-                                                .onTapGesture {
-                                                    if !execise.hasAlready {
-                                                        vm.exerciseSelectedForAdd = execise
-                                                        vm.currentMuscleGroup = addMuscleGroup(name: vm.muscleGroupSelectedForAdd?.name)
-                                                        addExercise(id: execise.id!)
-                                                        withAnimation {
-                                                            vm.pushedAddButton.toggle()
-                                                            vm.selectedMuscleOnHorizontalScroll = vm.currentMuscleGroup
-                                                            vm.trigerForScrollTo.toggle()
+                                VStack(spacing: 0) {
+                                    ScrollView(showsIndicators: false) {
+                                        ForEach(Array(vm.muscleGroupSelectedForAdd?.exerciseName as! Set<ExerciseName>)) { execise in
+                                            ChildSizeReader(height: $height) {
+                                                Text(execise.name ?? "")
+                                                    .font(.system(size: 22))
+                                                    .padding(.vertical, 3)
+                                                    .foregroundColor(execise.hasAlready ? .gray : .blue)
+                                                    .onTapGesture {
+                                                        if !execise.hasAlready {
+                                                            vm.exerciseSelectedForAdd = execise
+                                                            vm.currentMuscleGroup = addMuscleGroup(name: vm.muscleGroupSelectedForAdd?.name)
+                                                            addExercise(id: execise.id!)
+                                                            withAnimation {
+                                                                vm.pushedAddButton.toggle()
+                                                                vm.selectedMuscleOnHorizontalScroll = vm.currentMuscleGroup
+                                                                vm.trigerForScrollTo.toggle()
+                                                            }
+                                                            vm.trigerBetweenMuscleAndExercise.toggle()
+                                                            execise.hasAlready = true
                                                         }
-                                                        vm.trigerBetweenMuscleAndExercise.toggle()
-                                                        execise.hasAlready = true
                                                     }
-                                                }
+                                            }
                                         }
                                     }
-                                }
-                                Button {
-                                    vm.trigerBetweenMuscleAndExercise.toggle()
-                                } label: {
-                                    Text("назад")
+                                    .scrollDisabled((vm.muscleGroupSelectedForAdd?.exerciseName?.count)! < 8)
+                                    .frame(height: (height + 10) * (vm.muscleGroupSelectedForAdd?.exerciseName?.count ?? 0 < 8 ? CGFloat(vm.muscleGroupSelectedForAdd?.exerciseName?.count ?? 0) : 7))
+                                    Divider()
+                                    Button {
+                                        vm.trigerBetweenMuscleAndExercise.toggle()
+                                    } label: {
+                                        Text("назад")
+                                            .font(.system(size: 22))
+                                            .padding(.top)
+                                    }
                                 }
                             }
                         }
                     })
-                    Spacer()
+                    .padding()
                 }
-                .frame(width: UIScreen.main.bounds.width - 16, height: UIScreen.main.bounds.height * 0.4)
+                .frame(width: UIScreen.main.bounds.width - 16)
                 .background(.white)
                 .overlay(
                     RoundedRectangle(cornerRadius: 30)
