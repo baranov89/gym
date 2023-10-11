@@ -28,9 +28,7 @@ struct ChildSizeReader<Content: View>: View {
 
 private struct HeightPreferenceKey: PreferenceKey {
     static let defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat,
-                       nextValue: () -> CGFloat) {
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
     }
 }

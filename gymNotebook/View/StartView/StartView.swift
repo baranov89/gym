@@ -27,17 +27,15 @@ struct StartView: View {
     @FetchRequest(fetchRequest: ExerciseName.fetch(), animation: .default)
     private var exerciseName: FetchedResults<ExerciseName>
     
-    @State var currentTraining: Training?
-    @State var trigerWorkoutSelectionView: Bool = false
-    
-    @State var height: CGFloat = 0.0
+    @StateObject var vm: StartViewModel = StartViewModel()
+   
     
     var body: some View {
         ZStack {
             VStack {
                 Spacer()
                 Button {
-                    currentTraining = addTraining()
+                    vm.currentTraining = addTraining()
                     goMainView()
                 } label: {
                     Text("new")
@@ -48,7 +46,7 @@ struct StartView: View {
                         .padding()
                 }
                 Button {
-                    currentTraining = training.last
+                    vm.currentTraining = training.last
                     goMainView()
                 } label: {
                     Text("continue")
@@ -60,7 +58,7 @@ struct StartView: View {
                 }
                 Button {
                     withAnimation {
-                        trigerWorkoutSelectionView = true
+                        vm.trigerWorkoutSelectionView = true
                     }
                     
                 } label: {
@@ -73,61 +71,7 @@ struct StartView: View {
                 }
             }
             .zIndex(1.0)
-            VStack{
-                if trigerWorkoutSelectionView {
-                    Spacer()
-                    VStack(spacing: 0) {
-                        Text("Выберите тренировку")
-                            .font(.system(size: 24))
-                            .padding(.bottom)
-                        Divider()
-                        ScrollView(showsIndicators: false) {
-                            ForEach(training) { item in
-                                Button {
-                                    currentTraining = item
-                                    goMainView()
-                                    trigerWorkoutSelectionView = false
-                                } label: {
-                                    HStack{
-                                        if self.training.last?.id == item.id {
-                                            Text("last ")
-                                                .font(.system(size: 22))
-                                                .padding(.vertical, 3)
-                                        }
-                                        ChildSizeReader(height: $height) {
-                                            Text("\((item.trainingDate?.formatted(.dateTime.day().month().year()) ?? ""))" )
-                                                .font(.system(size: 22))
-                                                .padding(.vertical, 3)
-                                        }
-                                    }
-                                }
-                            }
-                            .padding(.top, 3)
-                            .padding(.vertical, 3)
-                        }
-                        .scrollDisabled(training.count < 8)
-                        .frame(height: (height + 10) * (training.count < 8 ? CGFloat(training.count) : 7))
-                        Divider()
-                        Button {
-                            withAnimation {
-                                trigerWorkoutSelectionView = false
-                            }
-                        } label: {
-                            Text("отмена")
-                                .font(.system(size: 22))
-                                .padding(.top)
-                        }
-                    }
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width - 16)
-                    .background(.white)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(.black, lineWidth: 1)
-                    )
-                    .transition(.move(edge: .trailing))
-                }
-            }
+            TrainingSelectionView(vm: vm, action: goMainView)
             .zIndex(2.0)
         }
         .onAppear{
@@ -149,12 +93,6 @@ struct StartView: View {
         }
     }
     
-    func goMainView() {
-        setFlagOnExeciseName()
-        checkTheExercisesStatus()
-        coordinator.goMainView(data: currentTraining)
-    }
-    
     func setFlagOnExeciseName() {
         for execiseName in exerciseName {
             execiseName.hasAlready = false
@@ -163,7 +101,7 @@ struct StartView: View {
     
     func checkTheExercisesStatus() {
         for execise in execisePower {
-            if execise.muscleGroup?.training?.id == currentTraining?.id {
+            if execise.muscleGroup?.training?.id == vm.currentTraining?.id {
                 for execiseName in exerciseName {
                     if execiseName.id == execise.id {
                         execiseName.hasAlready = true
@@ -172,6 +110,14 @@ struct StartView: View {
             }
         }
     }
+    
+    func goMainView() {
+        setFlagOnExeciseName()
+        checkTheExercisesStatus()
+        coordinator.goMainView(data: vm.currentTraining)
+    }
+    
+   
     
     func addTraining() -> Training {
         let training = Training(context: viewContext)
@@ -238,8 +184,8 @@ struct StartView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView(currentTraining: Training()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        StartView()
     }
 }

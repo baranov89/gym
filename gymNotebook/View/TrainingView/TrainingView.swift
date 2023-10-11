@@ -104,9 +104,9 @@ struct TrainingView: View {
     }
 }
 
-//struct TrainingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TrainingView(vm: TrainingViewModel())
-//    }
-//}
+struct TrainingView_Previews: PreviewProvider {
+    static var previews: some View {
+        TrainingView(vm: TrainingViewModel())
+    }
+}
 
