@@ -8,7 +8,7 @@
 import Foundation
 
 enum PagesMy: String, CaseIterable, Identifiable {
-    case start, main
+    case start, main, setView
     var id: String {
         self.rawValue
     }

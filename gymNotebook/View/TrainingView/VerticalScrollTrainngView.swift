@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct VerticalScrollTrainngView: View {
+    @EnvironmentObject var coordinator: Coordinator
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(fetchRequest: MuscleGroup.fetch(), animation: .default)
     private var muscleGroup: FetchedResults<MuscleGroup>
@@ -32,6 +33,9 @@ struct VerticalScrollTrainngView: View {
                                         .cornerRadius(10)
                                         .font(.system(size: 22))
                                         .padding(.horizontal)
+                                        .onTapGesture {
+                                            coordinator.goSetView(execise: execise)
+                                        }
                                 }
                             }
                             .frame(width: UIScreen.main.bounds.width)

@@ -32,6 +32,8 @@
 		79DBA8A62AD69AD7002E7388 /* ChildSizeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8A52AD69AD7002E7388 /* ChildSizeReader.swift */; };
 		79DBA8A92AD6BC37002E7388 /* TrainingSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8A82AD6BC37002E7388 /* TrainingSelectionView.swift */; };
 		79DBA8AB2AD6BCB6002E7388 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8AA2AD6BCB6002E7388 /* StartViewModel.swift */; };
+		79DBA8B12AD739E0002E7388 /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8B02AD739E0002E7388 /* SetView.swift */; };
+		79DBA8B32AD94C1D002E7388 /* ExeciseCardio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8B22AD94C1D002E7388 /* ExeciseCardio.swift */; };
 		79DC28422ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28412ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift */; };
 		79DC28452ACEABC40085BC4E /* TrainingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28442ACEABC40085BC4E /* TrainingViewModel.swift */; };
 		79DC28472ACEB7000085BC4E /* VerticalScrollTrainngView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28462ACEB7000085BC4E /* VerticalScrollTrainngView.swift */; };
@@ -64,6 +66,8 @@
 		79DBA8A52AD69AD7002E7388 /* ChildSizeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSizeReader.swift; sourceTree = "<group>"; };
 		79DBA8A82AD6BC37002E7388 /* TrainingSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSelectionView.swift; sourceTree = "<group>"; };
 		79DBA8AA2AD6BCB6002E7388 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
+		79DBA8B02AD739E0002E7388 /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
+		79DBA8B22AD94C1D002E7388 /* ExeciseCardio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExeciseCardio.swift; sourceTree = "<group>"; };
 		79DC28412ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollMuscleView.swift; sourceTree = "<group>"; };
 		79DC28442ACEABC40085BC4E /* TrainingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewModel.swift; sourceTree = "<group>"; };
 		79DC28462ACEB7000085BC4E /* VerticalScrollTrainngView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalScrollTrainngView.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 				79DBA8A72AD6BBF9002E7388 /* StartView */,
 				79A4D4DF2AB7583400F48B33 /* MainView.swift */,
 				79A4D4E62AB75B3A00F48B33 /* CategoryView.swift */,
+				79DBA8B42AD94E6B002E7388 /* SetView */,
 				79DC28402ACEA8FE0085BC4E /* TrainingView */,
 				79A4D4E42AB75B1500F48B33 /* HistoryView.swift */,
 			);
@@ -168,6 +173,7 @@
 				79DBA8982AD05A57002E7388 /* ExerciseName.swift */,
 				79DBA8A22AD3330E002E7388 /* ExecisePower.swift */,
 				79DBA89C2AD32E3D002E7388 /* MuscleGroup.swift */,
+				79DBA8B22AD94C1D002E7388 /* ExeciseCardio.swift */,
 				79DBA8942AD056D5002E7388 /* Training.swift */,
 				79DBA8962AD05888002E7388 /* NSManagedObjectContext.swift */,
 			);
@@ -189,6 +195,14 @@
 				79DBA8A82AD6BC37002E7388 /* TrainingSelectionView.swift */,
 			);
 			path = StartView;
+			sourceTree = "<group>";
+		};
+		79DBA8B42AD94E6B002E7388 /* SetView */ = {
+			isa = PBXGroup;
+			children = (
+				79DBA8B02AD739E0002E7388 /* SetView.swift */,
+			);
+			path = SetView;
 			sourceTree = "<group>";
 		};
 		79DC28402ACEA8FE0085BC4E /* TrainingView */ = {
@@ -283,6 +297,7 @@
 			files = (
 				79DBA8902AD0394B002E7388 /* MuscleGroupName.swift in Sources */,
 				793D28422AB703970039B086 /* Persistence.swift in Sources */,
+				79DBA8B32AD94C1D002E7388 /* ExeciseCardio.swift in Sources */,
 				79DC28472ACEB7000085BC4E /* VerticalScrollTrainngView.swift in Sources */,
 				79A4D4E92AB767F300F48B33 /* CoordinatorView.swift in Sources */,
 				79DC28452ACEABC40085BC4E /* TrainingViewModel.swift in Sources */,
@@ -294,6 +309,7 @@
 				79DC28422ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift in Sources */,
 				793D28452AB703970039B086 /* gymNotebook.xcdatamodeld in Sources */,
 				793D284C2AB71B490039B086 /* TrainingModel.swift in Sources */,
+				79DBA8B12AD739E0002E7388 /* SetView.swift in Sources */,
 				79DBA8AB2AD6BCB6002E7388 /* StartViewModel.swift in Sources */,
 				79DBA8922AD03D00002E7388 /* Category.swift in Sources */,
 				79A4D4EB2AB7683B00F48B33 /* Coordinator.swift in Sources */,

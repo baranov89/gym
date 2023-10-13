@@ -14,13 +14,19 @@ struct MainView: View {
     
     @ObservedObject var trainingViewModel: TrainingViewModel = TrainingViewModel()
     @State var selectedTag: Int = 1
-    var currentTraining: Training?
+    var currentTraining: Training
     
-    var navTitel: String  {
+    init(currentTraining: Training) {
+        self.currentTraining = currentTraining
+        trainingViewModel.currentTraining = currentTraining
+        trainingViewModel.selectedMuscleOnHorizontalScroll = Array(currentTraining.muscleGroup as! Set<MuscleGroup>).first
+    }
+    
+    private var navTitel: String  {
         var temp: String = ""
         switch selectedTag {
         case 0 : temp = "Ctegory"
-        case 1 : temp = "\((currentTraining?.trainingDate?.formatted(.dateTime.day().month().year()) ?? "jjjjj"))" 
+        case 1 : temp = "\((currentTraining.trainingDate?.formatted(.dateTime.day().month().year()) ?? "jjjjj"))" 
         case 2 : temp = "History"
         default:
             return ""
@@ -61,11 +67,14 @@ struct MainView: View {
                         }
                     }
             }
-            .navigationTitle(navTitel)
-        .onAppear {
-            trainingViewModel.currentTraining = currentTraining
-            trainingViewModel.selectedMuscleOnHorizontalScroll = Array(currentTraining?.muscleGroup as! Set<MuscleGroup>).first
-        }
+            .navigationTitle("Back")
+            .toolbar(content: {
+                ToolbarItem(placement: .principal) {
+                    HStack{
+                        Text(navTitel)
+                    }.font(.subheadline)
+                }
+            })
     }
 }
 

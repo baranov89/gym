@@ -15,3 +15,9 @@ extension ExecisePower {
         return request
     }
 }
+
+extension ExecisePower: Execise {
+}
+
+protocol Execise {
+}

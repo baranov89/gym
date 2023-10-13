@@ -114,7 +114,7 @@ struct StartView: View {
     func goMainView() {
         setFlagOnExeciseName()
         checkTheExercisesStatus()
-        coordinator.goMainView(data: vm.currentTraining)
+        coordinator.goMainView(training: vm.currentTraining)
     }
     
    
