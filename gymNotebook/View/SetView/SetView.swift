@@ -37,9 +37,6 @@ struct SetView<T>: View {
             HStack{
                 Spacer()
                 VStack{
-//                    Array(vm.currentTraining?.muscleGroup as! Set<MuscleGroup>), id: \.self
-//                    ForEach((currentExecise as? ExecisePower)?.options.sorted{$0 < $1}) { option in
-//                        Text(option.name) .padding(.vertical, 4)
                     
                 }
                 ScrollView(.horizontal) {
