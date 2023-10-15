@@ -21,6 +21,9 @@ struct StartView: View {
     @FetchRequest(fetchRequest: MuscleGroup.fetch(), animation: .default)
     private var muscleGroup: FetchedResults<MuscleGroup>
     
+    @FetchRequest(fetchRequest: PowerSet.fetch(), animation: .default)
+    private var powerSet: FetchedResults<PowerSet>
+    
     @FetchRequest(fetchRequest: ExecisePower.fetch(), animation: .default)
     private var execisePower: FetchedResults<ExecisePower>
     
@@ -75,7 +78,7 @@ struct StartView: View {
             .zIndex(2.0)
         }
         .onAppear{
-            deleteAllEntities()
+//            deleteAllEntities()
             if muscleGroupName.isEmpty {
                 addCategories()
             }
@@ -175,6 +178,15 @@ struct StartView: View {
         if !muscleGroup.isEmpty {
             print("dsdsdsdsdsd")
             for i in muscleGroup {
+                do {
+                    viewContext.delete(i)
+                    viewContext.saveContext()
+                }
+            }
+        }
+        if !powerSet.isEmpty {
+            print("dsdsdsdsdsd")
+            for i in powerSet {
                 do {
                     viewContext.delete(i)
                     viewContext.saveContext()
