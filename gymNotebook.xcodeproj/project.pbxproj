@@ -34,6 +34,9 @@
 		79DBA8AB2AD6BCB6002E7388 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8AA2AD6BCB6002E7388 /* StartViewModel.swift */; };
 		79DBA8B12AD739E0002E7388 /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8B02AD739E0002E7388 /* SetView.swift */; };
 		79DBA8B32AD94C1D002E7388 /* ExeciseCardio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8B22AD94C1D002E7388 /* ExeciseCardio.swift */; };
+		79DBA8BC2ADC76FF002E7388 /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8BB2ADC76FF002E7388 /* SetViewModel.swift */; };
+		79DBA8BE2ADC79FF002E7388 /* PowerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8BD2ADC79FF002E7388 /* PowerSet.swift */; };
+		79DBA8C02ADC7A1E002E7388 /* CardioSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DBA8BF2ADC7A1E002E7388 /* CardioSet.swift */; };
 		79DC28422ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28412ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift */; };
 		79DC28452ACEABC40085BC4E /* TrainingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28442ACEABC40085BC4E /* TrainingViewModel.swift */; };
 		79DC28472ACEB7000085BC4E /* VerticalScrollTrainngView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC28462ACEB7000085BC4E /* VerticalScrollTrainngView.swift */; };
@@ -68,6 +71,9 @@
 		79DBA8AA2AD6BCB6002E7388 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		79DBA8B02AD739E0002E7388 /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
 		79DBA8B22AD94C1D002E7388 /* ExeciseCardio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExeciseCardio.swift; sourceTree = "<group>"; };
+		79DBA8BB2ADC76FF002E7388 /* SetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewModel.swift; sourceTree = "<group>"; };
+		79DBA8BD2ADC79FF002E7388 /* PowerSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSet.swift; sourceTree = "<group>"; };
+		79DBA8BF2ADC7A1E002E7388 /* CardioSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardioSet.swift; sourceTree = "<group>"; };
 		79DC28412ACEA9310085BC4E /* HorizontallyScrollMuscleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollMuscleView.swift; sourceTree = "<group>"; };
 		79DC28442ACEABC40085BC4E /* TrainingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewModel.swift; sourceTree = "<group>"; };
 		79DC28462ACEB7000085BC4E /* VerticalScrollTrainngView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalScrollTrainngView.swift; sourceTree = "<group>"; };
@@ -172,6 +178,8 @@
 				79DBA88F2AD0394B002E7388 /* MuscleGroupName.swift */,
 				79DBA8982AD05A57002E7388 /* ExerciseName.swift */,
 				79DBA8A22AD3330E002E7388 /* ExecisePower.swift */,
+				79DBA8BD2ADC79FF002E7388 /* PowerSet.swift */,
+				79DBA8BF2ADC7A1E002E7388 /* CardioSet.swift */,
 				79DBA89C2AD32E3D002E7388 /* MuscleGroup.swift */,
 				79DBA8B22AD94C1D002E7388 /* ExeciseCardio.swift */,
 				79DBA8942AD056D5002E7388 /* Training.swift */,
@@ -221,6 +229,7 @@
 			children = (
 				79DC28442ACEABC40085BC4E /* TrainingViewModel.swift */,
 				79DBA8AA2AD6BCB6002E7388 /* StartViewModel.swift */,
+				79DBA8BB2ADC76FF002E7388 /* SetViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -314,12 +323,15 @@
 				79DBA8922AD03D00002E7388 /* Category.swift in Sources */,
 				79A4D4EB2AB7683B00F48B33 /* Coordinator.swift in Sources */,
 				79DBA8992AD05A57002E7388 /* ExerciseName.swift in Sources */,
+				79DBA8BC2ADC76FF002E7388 /* SetViewModel.swift in Sources */,
 				79DBA8A32AD3330E002E7388 /* ExecisePower.swift in Sources */,
 				79DBA89D2AD32E3D002E7388 /* MuscleGroup.swift in Sources */,
 				79DBA8A62AD69AD7002E7388 /* ChildSizeReader.swift in Sources */,
 				79DBA8A92AD6BC37002E7388 /* TrainingSelectionView.swift in Sources */,
+				79DBA8BE2ADC79FF002E7388 /* PowerSet.swift in Sources */,
 				79A4D4E02AB7583400F48B33 /* MainView.swift in Sources */,
 				79A4D4E32AB75A9F00F48B33 /* TrainingView.swift in Sources */,
+				79DBA8C02ADC7A1E002E7388 /* CardioSet.swift in Sources */,
 				79DBA8972AD05888002E7388 /* NSManagedObjectContext.swift in Sources */,
 				793D28392AB703950039B086 /* GymNotebookApp.swift in Sources */,
 				79A4D4E72AB75B3A00F48B33 /* CategoryView.swift in Sources */,

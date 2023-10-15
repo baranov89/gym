@@ -2,27 +2,21 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CardioSet" representedClassName="CardioSet" syncable="YES" codeGenerationType="class">
         <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="level" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="slope" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="speed" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="set" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="execiseCardio" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExeciseCardio" inverseName="cardioSet" inverseEntity="ExeciseCardio"/>
     </entity>
     <entity name="ExeciseCardio" representedClassName="ExeciseCardio" syncable="YES" codeGenerationType="class">
-        <attribute name="distance" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="level" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="slope" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="speed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="time" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="cardioSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardioSet" inverseName="execiseCardio" inverseEntity="CardioSet"/>
         <relationship name="training" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Training" inverseName="cardioExecise" inverseEntity="Training"/>
     </entity>
     <entity name="ExecisePower" representedClassName="ExecisePower" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="options" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="[String]"/>
         <relationship name="muscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="execisePower" inverseEntity="MuscleGroup"/>
         <relationship name="powerSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PowerSet" inverseName="execisePower" inverseEntity="PowerSet"/>
     </entity>
@@ -43,6 +37,7 @@
         <relationship name="exerciseName" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseName" inverseName="muscleGroupName" inverseEntity="ExerciseName"/>
     </entity>
     <entity name="PowerSet" representedClassName="PowerSet" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="repeats" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="set" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wieght" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

@@ -15,41 +15,50 @@ struct Moki: Identifiable {
 }
 
 struct SetView<T>: View {
-    @State var currentExecise: T
+    
+    @StateObject var vm: SetViewModel
+    
+    init(currentExecise: Execise) {
+        self._vm = StateObject(wrappedValue: SetViewModel(currentExecise: currentExecise))
+                               
+    }
  
     var array: [Moki] = [Moki(set: 1, weight: 2, repeats: 3),
                           Moki(set: 2, weight: 22, repeats: 12),
                           Moki(set: 3, weight: 22, repeats: 12),
                           Moki(set: 4, weight: 22, repeats: 12)]
     
-    private var navTitle: String {
-        var result: String = ""
-        switch currentExecise {
-        case let execise as ExecisePower : result = execise.name ?? ""
-        case let execise as ExeciseCardio : result = execise.name ?? ""
-        default:
-            return ""
-        }
-        return result
-    }
+   
+                               
     var body: some View {
         VStack {
             HStack{
                 Spacer()
                 VStack{
-                    
+                    ForEach(vm.arrayName, id: \.self) { option in
+                        Text(option)
+                    }
                 }
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(array) { item in
-                            VStack(spacing: 0) {
-                                Text("\(item.set)")
-                                Text("\(item.weight)")
-                                    .padding(.vertical, 8)
-                                Text("\(item.repeats)")
+                        if vm.currentExecise is ExecisePower {
+                            ForEach(Array(vm.currentExecise.getSet() as! Set<PowerSet>), id: \.self) { set in
+                                VStack{
+                                    Text("\(set.set)")
+                                    Text("\(set.wieght)")
+                                    Text("\(set.repeats)")
+                                }
+                            }
+                        } else {
+                            ForEach(Array(vm.currentExecise.getSet() as! Set<CardioSet>), id: \.self) { set in
+                                VStack{
+                                    Text("\(set.set)")
+                                    Text("\(set.distance)")
+                                    Text("\(set.time)")
+                                    Text("\(set.level)")
+                                }
                             }
                         }
-                        .padding(.leading, 10)
                     }
                     
                 }
@@ -64,7 +73,7 @@ struct SetView<T>: View {
                 Spacer()
             }
         }
-//        .navigationTitle(navTitle)
+        .navigationTitle(vm.navTitle)
     }
 }
 

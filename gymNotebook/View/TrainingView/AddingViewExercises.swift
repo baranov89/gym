@@ -148,18 +148,6 @@ struct AddingViewExercises: View {
                 execise.name = vm.exerciseSelectedForAdd?.name
                 execise.id = id
                 execise.muscleGroup = vm.currentMuscleGroup
-                var arrayOptionsName = ["set", "wiegth", "repeats"]
-                var arrayOptions: [Options] = []
-                for i in arrayOptionsName{
-                    var option = Options()
-                    option.name = "asd"
-                }
-                
-                var optionOne = Options()
-                var optionTwo = Options()
-                var optionOne = Options()
-                option.name = "asd"
-                execise.options = [option]
                 viewContext.saveContext()
             }
         case .cardio:

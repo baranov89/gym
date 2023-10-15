@@ -17,7 +17,19 @@ extension ExecisePower {
 }
 
 extension ExecisePower: Execise {
+    func getSet() -> NSSet? {
+        self.powerSet
+    }
+    
+    var id_: String {
+        get {
+            id ?? ""
+        }
+    }
+    
 }
 
 protocol Execise {
+    func getSet() -> NSSet?
+    var id_: String { get }
 }

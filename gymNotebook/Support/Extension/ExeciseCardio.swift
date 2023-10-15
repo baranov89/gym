@@ -8,4 +8,14 @@
 import Foundation
 
 extension ExeciseCardio: Execise {
+    func getSet() -> NSSet? {
+        self.cardioSet
+    }
+    
+    var id_: String {
+        get{
+            id ?? ""
+        }
+    }
+    
 }
