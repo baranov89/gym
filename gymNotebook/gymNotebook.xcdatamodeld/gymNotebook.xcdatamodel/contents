@@ -22,6 +22,7 @@
     <entity name="ExecisePower" representedClassName="ExecisePower" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="options" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="[String]"/>
         <relationship name="muscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="execisePower" inverseEntity="MuscleGroup"/>
         <relationship name="powerSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PowerSet" inverseName="execisePower" inverseEntity="PowerSet"/>
     </entity>
@@ -42,8 +43,9 @@
         <relationship name="exerciseName" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseName" inverseName="muscleGroupName" inverseEntity="ExerciseName"/>
     </entity>
     <entity name="PowerSet" representedClassName="PowerSet" syncable="YES" codeGenerationType="class">
-        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="repeats" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="set" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wieght" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="execisePower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExecisePower" inverseName="powerSet" inverseEntity="ExecisePower"/>
     </entity>
     <entity name="Training" representedClassName="Training" syncable="YES" codeGenerationType="class">

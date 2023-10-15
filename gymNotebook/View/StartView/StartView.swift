@@ -75,7 +75,7 @@ struct StartView: View {
             .zIndex(2.0)
         }
         .onAppear{
-//            deleteAllEntities()
+            deleteAllEntities()
             if muscleGroupName.isEmpty {
                 addCategories()
             }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		793D28392AB703950039B086 /* gymNotebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D28382AB703950039B086 /* gymNotebookApp.swift */; };
+		793D28392AB703950039B086 /* GymNotebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D28382AB703950039B086 /* GymNotebookApp.swift */; };
 		793D283B2AB703950039B086 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D283A2AB703950039B086 /* StartView.swift */; };
 		793D283D2AB703970039B086 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 793D283C2AB703970039B086 /* Assets.xcassets */; };
 		793D28402AB703970039B086 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 793D283F2AB703970039B086 /* Preview Assets.xcassets */; };
@@ -41,7 +41,7 @@
 
 /* Begin PBXFileReference section */
 		793D28352AB703950039B086 /* gymNotebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gymNotebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		793D28382AB703950039B086 /* gymNotebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gymNotebookApp.swift; sourceTree = "<group>"; };
+		793D28382AB703950039B086 /* GymNotebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymNotebookApp.swift; sourceTree = "<group>"; };
 		793D283A2AB703950039B086 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		793D283C2AB703970039B086 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		793D283F2AB703970039B086 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		793D28372AB703950039B086 /* gymNotebook */ = {
 			isa = PBXGroup;
 			children = (
-				793D28382AB703950039B086 /* gymNotebookApp.swift */,
+				793D28382AB703950039B086 /* GymNotebookApp.swift */,
 				793D284B2AB71B490039B086 /* TrainingModel.swift */,
 				79DC28432ACEAB930085BC4E /* ViewModel */,
 				79A4D4E12AB7583800F48B33 /* View */,
@@ -321,7 +321,7 @@
 				79A4D4E02AB7583400F48B33 /* MainView.swift in Sources */,
 				79A4D4E32AB75A9F00F48B33 /* TrainingView.swift in Sources */,
 				79DBA8972AD05888002E7388 /* NSManagedObjectContext.swift in Sources */,
-				793D28392AB703950039B086 /* gymNotebookApp.swift in Sources */,
+				793D28392AB703950039B086 /* GymNotebookApp.swift in Sources */,
 				79A4D4E72AB75B3A00F48B33 /* CategoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

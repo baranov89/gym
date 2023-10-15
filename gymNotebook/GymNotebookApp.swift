@@ -1,5 +1,5 @@
 //
-//  gymNotebookApp.swift
+//  GymNotebookApp.swift
 //  gymNotebook
 //
 //  Created by Алексей Баранов on 17.09.2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct gymNotebookApp: App {
+struct GymNotebookApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
