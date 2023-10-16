@@ -22,4 +22,5 @@ class TrainingViewModel: ObservableObject {
     @Published var trigerBetweenMuscleAndExercise = true
     @Published var trigerForScrollTo: Bool = false
     @Published var pushedAddButton: Bool = false
+    
 }

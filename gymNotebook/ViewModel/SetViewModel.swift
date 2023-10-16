@@ -31,6 +31,6 @@ class SetViewModel: ObservableObject {
     }
     
     init(currentExecise: Execise) {
-        self._currentExecise = Published(wrappedValue: currentExecise) 
+        self._currentExecise = Published(wrappedValue: currentExecise)
     }
 }

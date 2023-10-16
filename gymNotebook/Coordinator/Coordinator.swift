@@ -11,15 +11,16 @@ import SwiftUI
 @MainActor
 final class Coordinator: ObservableObject {
     @Published var path = NavigationPath()
-    @Published var currentTraining: Training?
     @Published var currentExecise: Execise?
+    @Published var selectedMuscle: MuscleGroup?
+    @Published var trainingViewModel: TrainingViewModel = TrainingViewModel()
     
     func goStartView() {
         path.removeLast(path.count)
     }
     
     func goMainView(training: Training?) {
-        currentTraining = training
+        trainingViewModel.currentTraining = training
         path.append(PagesMy.main)
     }
     
@@ -34,9 +35,7 @@ final class Coordinator: ObservableObject {
         case .start :
             StartView()
         case .main :
-            if let currentTraining = currentTraining {
-                MainView(currentTraining: currentTraining)
-            }
+            MainView(vm: trainingViewModel)
         case .setView :
             if let currentExecise = currentExecise {
                 if currentExecise is ExecisePower {

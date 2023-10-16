@@ -63,7 +63,6 @@ struct StartView: View {
                     withAnimation {
                         vm.trigerWorkoutSelectionView = true
                     }
-                    
                 } label: {
                     Text("open")
                         .foregroundColor(.white)

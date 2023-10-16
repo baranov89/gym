@@ -12,21 +12,25 @@ struct MainView: View {
     @FetchRequest(fetchRequest: Training.fetch(), animation: .default)
     private var training: FetchedResults<Training>
     
-    @ObservedObject var trainingViewModel: TrainingViewModel = TrainingViewModel()
+    @ObservedObject var trainingViewModel: TrainingViewModel
     @State var selectedTag: Int = 1
-    var currentTraining: Training
     
-    init(currentTraining: Training) {
-        self.currentTraining = currentTraining
-        trainingViewModel.currentTraining = currentTraining
-        trainingViewModel.selectedMuscleOnHorizontalScroll = Array(currentTraining.muscleGroup as! Set<MuscleGroup>).first
+    init(vm: TrainingViewModel) {
+        self._trainingViewModel = ObservedObject(wrappedValue: vm)
+        if vm.selectedMuscleOnHorizontalScroll == nil {
+            vm.selectedMuscleOnHorizontalScroll = Array(vm.currentTraining?.muscleGroup as! Set<MuscleGroup>).first
+        } else {
+            if !(vm.currentTraining?.muscleGroup as! Set<MuscleGroup>).contains(vm.selectedMuscleOnHorizontalScroll!) {
+                vm.selectedMuscleOnHorizontalScroll = Array(vm.currentTraining?.muscleGroup as! Set<MuscleGroup>).first
+            }
+        }
     }
     
     private var navTitel: String  {
         var temp: String = ""
         switch selectedTag {
         case 0 : temp = "Ctegory"
-        case 1 : temp = "\((currentTraining.trainingDate?.formatted(.dateTime.day().month().year()) ?? "jjjjj"))" 
+        case 1 : temp = "\((trainingViewModel.currentTraining?.trainingDate?.formatted(.dateTime.day().month().year()) ?? "jjjjj"))"
         case 2 : temp = "History"
         default:
             return ""
@@ -80,6 +84,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(currentTraining: Training())
+        MainView(vm: TrainingViewModel())
     }
 }

@@ -25,7 +25,6 @@ struct SetView<T>: View {
         )
             
         self._vm = StateObject(wrappedValue: SetViewModel(currentExecise: currentExecise))
-                               
     }
                                
     var body: some View {
@@ -66,7 +65,6 @@ struct SetView<T>: View {
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(.black, lineWidth: 1)
                 )
-                
                 Spacer()
             }
             Button {
@@ -101,8 +99,8 @@ struct SetView<T>: View {
     }
 }
 
-#Preview {
-    NavigationView{
-        SetView<ExecisePower>(currentExecise: ExecisePower())
-    }
-}
+//#Preview {
+//    NavigationView{
+//        SetView<ExecisePower>(currentExecise: ExecisePower(), selectedMuscleOnHorizontalScroll: MuscleGroup())
+//    }
+//}
