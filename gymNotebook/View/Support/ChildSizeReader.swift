@@ -33,7 +33,6 @@ private struct HeightPreferenceKey: PreferenceKey {
     }
 }
 
-
 struct  ChildSizeReader_Previews: PreviewProvider {
     static var previews: some View {
         ChildSizeReader(height: .constant(10)) {

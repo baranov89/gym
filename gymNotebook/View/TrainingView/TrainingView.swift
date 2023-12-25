@@ -9,15 +9,15 @@ import SwiftUI
 
 struct TrainingView: View {
 
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(fetchRequest: ExerciseName.fetch(), animation: .default)
-    private var exerciseName: FetchedResults<ExerciseName>
-    
-    @FetchRequest(fetchRequest: MuscleGroupName.fetch(), animation: .default)
-    private var muscleGroupName: FetchedResults<MuscleGroupName>
-    
-    @FetchRequest(fetchRequest: ExecisePower.fetch(), animation: .default)
-    private var execisePower: FetchedResults<ExecisePower>
+//    @Environment(\.managedObjectContext) private var viewContext
+//    @FetchRequest(fetchRequest: ExerciseName.fetch(), animation: .default)
+//    private var exerciseName: FetchedResults<ExerciseName>
+//    
+//    @FetchRequest(fetchRequest: MuscleGroupName.fetch(), animation: .default)
+//    private var muscleGroupName: FetchedResults<MuscleGroupName>
+//    
+//    @FetchRequest(fetchRequest: ExecisePower.fetch(), animation: .default)
+//    private var execisePower: FetchedResults<ExecisePower>
     
     @ObservedObject var vm: TrainingViewModel
     
@@ -26,7 +26,7 @@ struct TrainingView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottom){
+//        ZStack(alignment: .bottom){
             VStack{
                 Divider()
                 switch vm.currentCategiry {
@@ -61,9 +61,9 @@ struct TrainingView: View {
                 Spacer()
                 Divider()
                 Button {
-                    withAnimation {
+//                    withAnimation {
                         vm.pushedAddButton.toggle()
-                    }
+//                    }
                 } label: {
                     Text("add \(vm.currentCategiry.rawValue) exercise")
                         .foregroundColor(.white)
@@ -97,10 +97,14 @@ struct TrainingView: View {
                 .padding(.horizontal)
                 Divider()
             }
-            .zIndex(1)
-            AddingViewExercises(vm: vm)
-                .zIndex(2)
-        }
+            .sheet(isPresented: $vm.pushedAddButton) {
+                AddingViewExercises(vm: vm)
+            }
+            //            .blur(radius: vm.pushedAddButton ? 10 : 0)
+//            .zIndex(1)
+//            AddingViewExercises(vm: vm)
+//                .zIndex(2)
+//        }
     }
 }
 

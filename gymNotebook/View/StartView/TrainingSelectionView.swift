@@ -78,6 +78,7 @@ struct TrainingSelectionView: View {
                 .transition(.move(edge: .trailing))
             }
         }
+        .background(Color.clear)
     }
 }
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SetView<T>: View {
+struct SetView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest var fetchRequestPowerSet: FetchedResults<PowerSet>
     @FetchRequest var fetchRequestCardioSet: FetchedResults<CardioSet>
@@ -16,14 +16,13 @@ struct SetView<T>: View {
     
     init(currentExecise: Execise) {
         _fetchRequestPowerSet = FetchRequest<PowerSet> (
-            sortDescriptors: [SortDescriptor(\.id)],
+            sortDescriptors: [SortDescriptor(\.set)],
             predicate: NSPredicate(format: "execisePower.id == %@", "\(currentExecise.id_)")
         )
         _fetchRequestCardioSet = FetchRequest<CardioSet> (
-            sortDescriptors: [SortDescriptor(\.id)],
+            sortDescriptors: [SortDescriptor(\.set)],
             predicate: NSPredicate(format: "execiseCardio.id == %@", "\(currentExecise.id_)")
         )
-            
         self._vm = StateObject(wrappedValue: SetViewModel(currentExecise: currentExecise))
     }
                                
@@ -99,8 +98,8 @@ struct SetView<T>: View {
     }
 }
 
-//#Preview {
-//    NavigationView{
-//        SetView<ExecisePower>(currentExecise: ExecisePower(), selectedMuscleOnHorizontalScroll: MuscleGroup())
-//    }
-//}
+#Preview {
+    NavigationView{
+        SetView(currentExecise: ExecisePower())
+    }
+}

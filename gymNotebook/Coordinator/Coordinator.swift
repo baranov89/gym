@@ -32,17 +32,11 @@ final class Coordinator: ObservableObject {
     @ViewBuilder
     func getPage(page: PagesMy) -> some View {
         switch page {
-        case .start :
-            StartView()
-        case .main :
-            MainView(vm: trainingViewModel)
+        case .start : StartView()
+        case .main : MainView(vm: trainingViewModel)
         case .setView :
             if let currentExecise = currentExecise {
-                if currentExecise is ExecisePower {
-                    SetView<ExecisePower>(currentExecise: currentExecise as! ExecisePower)
-                } else {
-                    SetView<ExeciseCardio>(currentExecise: currentExecise as! ExeciseCardio)
-                }
+                SetView(currentExecise: currentExecise)
             }
         }
     }
